@@ -20,10 +20,10 @@ module Turn
       controller.loadpath.each{ |path| $: << path } unless controller.live?
       controller.requires.each{ |path| require(path) }
 
-      [controller.files].flatten.each{ |path| require(path) }
+      [controller.files].flatten.each{ |path| load(path) }
 
       files = [controller.files].flatten
-      files.each{ |path| require(path) }   
+      files.each{ |path| load(path) }
 
       # TODO: Better name ?
       @turn_suite_name = files.map{ |path| File.dirname(path).sub(Dir.pwd+'/','') }.uniq.join(',')
